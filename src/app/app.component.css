@@ -22,13 +22,6 @@
   cursor: pointer;
 }
 
-.logo-card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: none;
-}
-
 .footer-card {
   display: flex;
   align-items: center;
@@ -42,24 +35,5 @@
   height: 90%;
   margin-right: 2em;
   margin-left: 0.25em;
-}
-
-.img-logo {
-  height: 34em;
-  width: 34em;
-  animation-name: start-logo;
-  animation-duration: 4s;
-  position: relative;
-}
-
-@keyframes start-logo {
-  0%   {
-    left: -100%;
-    transform: rotate(0);
-  }
-  100% {
-    left: 0;
-    transform: rotate(360deg);
-  }
 }
 
