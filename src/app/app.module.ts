@@ -7,11 +7,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { AppRoutingModule } from './app-routing.module';
 import { StartPageComponent } from './start-page/start-page.component';
+import { ApplicationComponent } from './application/application.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
-    StartPageComponent
+    StartPageComponent,
+    ApplicationComponent
   ],
   imports: [
     BrowserModule,
@@ -19,6 +24,9 @@ import { StartPageComponent } from './start-page/start-page.component';
     MatToolbarModule,
     MatCardModule,
     AppRoutingModule,
+    MatSidenavModule,
+    MatCheckboxModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
