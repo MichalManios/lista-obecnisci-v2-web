@@ -7,26 +7,30 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { AppRoutingModule } from './app-routing.module';
 import { StartPageComponent } from './start-page/start-page.component';
-import { ApplicationComponent } from './application/application.component';
-import {MatSidenavModule} from "@angular/material/sidenav";
-import {MatCheckboxModule} from "@angular/material/checkbox";
-import {FormsModule} from "@angular/forms";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatTableModule } from "@angular/material/table";
+import { FormsModule } from "@angular/forms";
+import { WorkersComponent } from './workers/workers.component';
+import { MenuNavigationComponent } from './menu-navigation/menu-navigation.component';
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 @NgModule({
   declarations: [
     AppComponent,
     StartPageComponent,
-    ApplicationComponent
+    MenuNavigationComponent,
+    WorkersComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
     AppRoutingModule,
     MatSidenavModule,
-    MatCheckboxModule,
-    FormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

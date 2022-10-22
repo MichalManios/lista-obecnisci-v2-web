@@ -1,35 +1,35 @@
 <mat-sidenav-container class="nav-container">
   <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="nav-menu">
     <div class="content-menu">
-     <a class="position-menu">
+     <a class="position-menu neumorphic neumorphic--pressed" (click)="getCurrentUrl()" routerLinkActive="active"
+        [routerLink]="['/application']" [ngClass]="'application' === url ? 'position-menu-clicked' : ''">
        <img mat-card-sm-image src="../../assets/menu-icons/home.png" alt="Photo of a home for start path" class="menu-icon">
        <h2 class="text-menu">Start</h2>
      </a>
-      <a class="position-menu">
+      <a class="position-menu neumorphic neumorphic--pressed" (click)="getCurrentUrl()" routerLinkActive="active"
+         [routerLink]="['/workers']" [ngClass]="'workers' === url ? 'position-menu-clicked' : ''">
         <img mat-card-sm-image src="../../assets/menu-icons/worker.png" alt="Photo of a worker for workers path" class="menu-icon">
         <h2 class="text-menu">Pracownicy</h2>
       </a>
-      <a class="position-menu">
+      <a class="position-menu neumorphic neumorphic--pressed">
         <img mat-card-sm-image src="../../assets/menu-icons/department.png" alt="Photo of a departments for departments path" class="menu-icon">
         <h2 class="text-menu">Działy</h2>
       </a>
-      <a class="position-menu">
+      <a class="position-menu neumorphic neumorphic--pressed">
         <img mat-card-sm-image src="../../assets/menu-icons/holidays.png" alt="Photo of a holiday for holidays path" class="menu-icon">
         <h2 class="text-menu">Święta</h2>
       </a>
-      <a class="position-menu">
+      <a class="position-menu neumorphic neumorphic--pressed">
         <img mat-card-sm-image src="../../assets/menu-icons/admin.png" alt="Photo of a admin for admins path" class="menu-icon">
         <h2 class="text-menu">Admin</h2>
       </a>
     </div>
-    <img mat-card-image src="../../assets/menu-icons/hide-menu.png" alt="Photo of a left arrow to hide menu" (click)="sidenav.toggle()"
+    <img mat-card-image src="../../assets/menu-icons/hide-menu.png" alt="Photo of a left arrow to hide menu" (click)="toggleMenu()"
          [ngClass]="opened ? 'navigation-close' : 'navigation-opened'">
   </mat-sidenav>
 
   <mat-sidenav-content class="button-arrow">
-    <img mat-card-image src="../../assets/menu-icons/arrow.png" alt="Photo of a arrow to show menu" (click)="sidenav.toggle()"
+    <img mat-card-image src="../../assets/menu-icons/arrow.png" alt="Photo of a arrow to show menu" (click)="toggleMenu()"
          [ngClass]="!opened ? 'navigation-control' : 'navigation-control-opened'">
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-<app-start-page></app-start-page>
