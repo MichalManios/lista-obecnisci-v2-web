@@ -6,9 +6,9 @@
     <button class="login-button" aria-label="Button to login" [routerLink]="['/login']" routerLinkActive="active">Zaloguj</button>
   </mat-toolbar>
 
-  <app-menu-navigation *ngIf="isMenuVisible"></app-menu-navigation>
-
   <router-outlet></router-outlet>
+
+  <app-menu-navigation *ngIf="isMenuVisible"></app-menu-navigation>
 
   <mat-card class="footer-card">
     <mat-card-content>

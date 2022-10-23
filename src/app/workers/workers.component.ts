@@ -12,7 +12,8 @@ export class WorkersComponent implements OnInit, AfterViewInit {
 
   isMenuOpen!: boolean;
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'buttons'];
+
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -57,4 +58,10 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
   {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
   {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
+  {position: 21, name: 'Phosphorus', weight: 30.9738, symbol: 'P'},
+  {position: 22, name: 'Sulfur', weight: 32.065, symbol: 'S'},
+  {position: 23, name: 'Chlorine', weight: 35.453, symbol: 'Cl'},
+  {position: 24, name: 'Argon', weight: 39.948, symbol: 'Ar'},
+  {position: 25, name: 'Potassium', weight: 39.0983, symbol: 'K'},
+  {position: 26, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
 ];

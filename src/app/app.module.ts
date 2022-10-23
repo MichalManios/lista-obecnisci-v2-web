@@ -13,6 +13,9 @@ import { FormsModule } from "@angular/forms";
 import { WorkersComponent } from './workers/workers.component';
 import { MenuNavigationComponent } from './menu-navigation/menu-navigation.component';
 import { MatPaginatorModule } from "@angular/material/paginator";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { MatPaginatorModule } from "@angular/material/paginator";
     MatPaginatorModule,
     AppRoutingModule,
     MatSidenavModule,
-    FormsModule
+    FormsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
