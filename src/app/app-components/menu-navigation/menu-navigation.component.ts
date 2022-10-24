@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
-import { MenuStateService } from '../shared/menu-state.service';
+import { MenuStateService } from '../../shared/menu-state.service';
 import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({

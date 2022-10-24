@@ -1,42 +1,29 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
+import { AppComponent } from './app-components/app-component/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { WorkersModule } from './workers/workers.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
+import { StartPageComponent } from './app-components/start-page/start-page.component';
+import { MenuNavigationComponent } from './app-components/menu-navigation/menu-navigation.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { AppRoutingModule } from './app-routing.module';
-import { StartPageComponent } from './start-page/start-page.component';
-import { MatSidenavModule } from "@angular/material/sidenav";
-import { MatTableModule } from "@angular/material/table";
-import { FormsModule } from "@angular/forms";
-import { WorkersComponent } from './workers/workers.component';
-import { MenuNavigationComponent } from './menu-navigation/menu-navigation.component';
-import { MatPaginatorModule } from "@angular/material/paginator";
-import {MatIconModule} from "@angular/material/icon";
-import {MatButtonModule} from "@angular/material/button";
-import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
     AppComponent,
     StartPageComponent,
-    MenuNavigationComponent,
-    WorkersComponent
+    MenuNavigationComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    WorkersModule,
     MatToolbarModule,
-    MatCardModule,
-    MatTableModule,
-    MatPaginatorModule,
     AppRoutingModule,
-    MatSidenavModule,
-    FormsModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule
+    MatCardModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

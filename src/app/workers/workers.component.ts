@@ -1,15 +1,15 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MenuStateService } from '../shared/menu-state.service';
-import {Subscription, tap} from "rxjs";
+import { Subscription, tap } from "rxjs";
 
 @Component({
   selector: 'app-workers',
   templateUrl: './workers.component.html',
   styleUrls: ['./workers.component.css']
 })
-export class WorkersComponent implements OnInit, AfterViewInit, OnDestroy {
+export class WorkersComponent implements OnInit, OnDestroy {
 
   isMenuOpen!: boolean;
 
@@ -22,10 +22,6 @@ export class WorkersComponent implements OnInit, AfterViewInit, OnDestroy {
   private subscriptions$: Subscription[] = [];
 
   constructor(private menuStateService: MenuStateService) {
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
   }
 
   ngOnInit(): void {
