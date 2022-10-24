@@ -1,14 +1,15 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MenuStateService } from '../shared/menu-state.service';
+import {Subscription, tap} from "rxjs";
 
 @Component({
   selector: 'app-workers',
   templateUrl: './workers.component.html',
   styleUrls: ['./workers.component.css']
 })
-export class WorkersComponent implements OnInit, AfterViewInit {
+export class WorkersComponent implements OnInit, AfterViewInit, OnDestroy {
 
   isMenuOpen!: boolean;
 
@@ -18,6 +19,8 @@ export class WorkersComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  private subscriptions$: Subscription[] = [];
+
   constructor(private menuStateService: MenuStateService) {
   }
 
@@ -26,7 +29,26 @@ export class WorkersComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.menuStateService.currentStateManu.subscribe(state => this.isMenuOpen = state);
+    this.getCurrentStateMenu();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribeAllSubscriptions();
+  }
+
+  private getCurrentStateMenu(): void {
+    const subscription$ = this.menuStateService.currentStateManu
+      .pipe(tap(state => this.isMenuOpen = state)).subscribe();
+
+    this.addSubscriptionToUnsubscribe(subscription$);
+  }
+
+  private addSubscriptionToUnsubscribe(subscription: Subscription): void {
+    this.subscriptions$.push(subscription);
+  }
+
+  private unsubscribeAllSubscriptions(): void {
+    this.subscriptions$.forEach((subscription) => subscription.unsubscribe());
   }
 }
 
