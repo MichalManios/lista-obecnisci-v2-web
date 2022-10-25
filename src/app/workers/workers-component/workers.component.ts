@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
-import { MenuStateService } from '../shared/menu-state.service';
+import { MenuStateService } from '../../shared/menu-state.service';
 import { Subscription, tap } from "rxjs";
 
 @Component({

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app-components/app-component/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { WorkersModule } from './workers/workers.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { StartPageComponent } from './app-components/start-page/start-page.component';
@@ -19,7 +18,6 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    WorkersModule,
     MatToolbarModule,
     AppRoutingModule,
     MatCardModule,
