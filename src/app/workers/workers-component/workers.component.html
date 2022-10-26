@@ -10,7 +10,8 @@
       <button mat-fab color="primary" aria-label="Button to add worker with icon add person."
               matTooltip="Dodaj funkcjonariusza/pracownika"
               [matTooltipShowDelay]="500"
-              [matTooltipHideDelay]="0">
+              [matTooltipHideDelay]="0"
+              (click)="addWorkers()">
         <mat-icon>person_add</mat-icon>
       </button>
     </div>

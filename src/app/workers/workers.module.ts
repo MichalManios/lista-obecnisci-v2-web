@@ -7,12 +7,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { WorkersRoutingModule } from './workers-routing.module';
+import { AddWorkersComponent } from './add-workers/add-workers.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {FormsModule} from "@angular/forms";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatInputModule} from "@angular/material/input";
+import {MatSelectModule} from "@angular/material/select";
 
 
 
 @NgModule({
   declarations: [
-    WorkersComponent
+    WorkersComponent,
+    AddWorkersComponent
   ],
   exports: [
     WorkersComponent
@@ -24,7 +31,12 @@ import { WorkersRoutingModule } from './workers-routing.module';
     MatIconModule,
     MatTableModule,
     MatButtonModule,
-    WorkersRoutingModule
+    WorkersRoutingModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatDialogModule,
+    MatInputModule,
+    MatSelectModule
   ]
 })
 export class WorkersModule { }
