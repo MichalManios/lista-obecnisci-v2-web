@@ -43,6 +43,7 @@
 }
 
 .img-logo-toolbar {
+  z-index: 1000;
   height: 90%;
   margin-right: 2em;
   margin-left: 0.25em;

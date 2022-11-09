@@ -12,8 +12,6 @@ export class AppComponent {
 
   user = new User();
 
-  isMenuVisible = true;
-
   title = 'Lista obecności';
 
   isLoggedIn = false;
