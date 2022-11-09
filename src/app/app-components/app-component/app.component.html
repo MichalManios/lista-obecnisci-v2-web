@@ -3,7 +3,11 @@
     <img mat-card-sm-image src="../../../assets/Logo3.png" alt="Photo of a logo application" class="img-logo-toolbar">
     <span>Lista obecności</span>
     <span class="spacer"></span>
-    <button class="login-button" aria-label="Button to login" [routerLink]="['/login']" routerLinkActive="active">Zaloguj</button>
+    <button class="login-button" aria-label="Button to login" (click)="login()" *ngIf="!isLoggedIn; else logoutUser">Zaloguj</button>
+    <ng-template #logoutUser>
+      <span>Witaj {{ user.name }}</span>
+      <button class="login-button" aria-label="Button to login" (click)="logout()">Wyloguj</button>
+    </ng-template>
   </mat-toolbar>
 
   <router-outlet></router-outlet>

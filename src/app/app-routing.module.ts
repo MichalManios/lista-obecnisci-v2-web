@@ -2,11 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { StartPageComponent } from './app-components/start-page/start-page.component';
+import { AuthKeyClockGuard } from './security/auth-guard/auth.route';
 
 const routes: Routes = [
   { path: '', component: StartPageComponent },
-  { path: 'application', component: StartPageComponent }, //tu może też zastosuj lazy loading dla menu może czcionki też pobierz
-  { path: 'workers', loadChildren: () => import('./workers/workers.module').then(m => m.WorkersModule) }
+  { path: 'application', component: StartPageComponent, canActivate: [AuthKeyClockGuard],
+    data: { roles: ['AUTHORIZED_USER', 'ADMINISTRATOR'] } }, //tu może też zastosuj lazy loading dla menu może czcionki też pobierz
+  { path: 'workers', canActivate: [AuthKeyClockGuard], data: { roles: ['AUTHORIZED_USER', 'ADMINISTRATOR'] },
+    loadChildren: () => import('./workers/workers.module').then(m => m.WorkersModule) }
 ];
 
 @NgModule({
