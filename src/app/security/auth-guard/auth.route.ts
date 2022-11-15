@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  Router,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { KeycloakAuthGuard, KeycloakService } from 'keycloak-angular';
 
 import { KeycloakProfile } from 'keycloak-js';
-import {User} from "../model/user.class";
+import { User } from "../model/user.class";
 
 @Injectable({
   providedIn: 'root',
@@ -15,28 +11,24 @@ import {User} from "../model/user.class";
 export class AuthKeyClockGuard extends KeycloakAuthGuard {
   user = new User();
   public userProfile: KeycloakProfile | null = null;
-  constructor(
-    protected override readonly router: Router,
-    protected readonly keycloak: KeycloakService
-  ) {
+
+  constructor( protected override readonly router: Router,
+               protected readonly keycloak: KeycloakService) {
     super(router, keycloak);
   }
 
-  public async isAccessAllowed(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ) {
+  public async isAccessAllowed(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     // Force the user to log in if currently unauthenticated.
     if (!this.authenticated) {
       await this.keycloak.login({
         redirectUri: window.location.origin + state.url,
       });
-    }else{
+    } else {
       this.userProfile = await this.keycloak.loadUserProfile();
       this.user.authStatus = 'AUTH';
       this.user.name = this.userProfile.firstName || "";
       this.user.email = this.userProfile.email || "";
-      window.sessionStorage.setItem("userdetails",JSON.stringify(this.user));
+      window.sessionStorage.setItem("userdetails", JSON.stringify(this.user));
     }
 
     // Get the roles required from the route.

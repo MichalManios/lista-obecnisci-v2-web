@@ -7,7 +7,7 @@ import { AuthKeyClockGuard } from './security/auth-guard/auth.route';
 const routes: Routes = [
   { path: '', component: StartPageComponent },
   { path: 'application', component: StartPageComponent, canActivate: [AuthKeyClockGuard],
-    data: { roles: ['AUTHORIZED_USER', 'ADMINISTRATOR'] } }, //tu może też zastosuj lazy loading dla menu może czcionki też pobierz
+    data: { roles: ['AUTHORIZED_USER', 'ADMINISTRATOR'] } },
   { path: 'workers', canActivate: [AuthKeyClockGuard], data: { roles: ['AUTHORIZED_USER', 'ADMINISTRATOR'] },
     loadChildren: () => import('./workers/workers.module').then(m => m.WorkersModule) }
 ];

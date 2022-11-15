@@ -64,10 +64,17 @@ tr:nth-child(even) {
 }
 
 .button-container {
-  justify-content: center;
-  width: 4em;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 8em;
   align-items: end;
   margin: 0px 0px 0px auto;
+}
+
+.select {
+  height: 4em;
+  margin: auto 1em auto auto;
 }
 
 .button-container button:hover {
@@ -116,4 +123,21 @@ tr:nth-child(even) {
 
 .buttons-column {
   width: 10em;
+}
+
+.text-center {
+  text-align: center;
+}
+
+::ng-deep .mat-form-field .mat-form-field-label {
+  color: #3f51b5;
+}
+
+::ng-deep .mat-form-field.mat-primary .mat-select-arrow{
+  color: #3f51b5;
+}
+
+::ng-deep .mat-select-value
+{
+  color: #3f51b5 !important;
 }

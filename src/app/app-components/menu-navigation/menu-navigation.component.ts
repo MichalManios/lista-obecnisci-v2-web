@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { MenuStateService } from '../../shared/menu-state.service';
 import { MatSidenav } from '@angular/material/sidenav';
 
@@ -25,7 +25,7 @@ export class MenuNavigationComponent implements OnInit {
 
   getCurrentUrl(): void {
     this.router.events.subscribe(data => {
-      if (data instanceof NavigationStart) this.url = data.url.split('/').pop();
+      if (data instanceof NavigationEnd) this.url = data.url.split('/').pop();
     });
   }
 

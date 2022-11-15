@@ -8,11 +8,12 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { WorkersRoutingModule } from './workers-routing.module';
 import { AddWorkersComponent } from './add-workers/add-workers.component';
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {FormsModule} from "@angular/forms";
-import {MatDialogModule} from "@angular/material/dialog";
-import {MatInputModule} from "@angular/material/input";
-import {MatSelectModule} from "@angular/material/select";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { WorkersService } from './workers.service';
 
 
 
@@ -37,6 +38,7 @@ import {MatSelectModule} from "@angular/material/select";
     MatDialogModule,
     MatInputModule,
     MatSelectModule
-  ]
+  ],
+  providers: [ WorkersService ]
 })
 export class WorkersModule { }

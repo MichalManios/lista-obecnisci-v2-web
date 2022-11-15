@@ -9,7 +9,7 @@ import { MenuNavigationComponent } from './app-components/menu-navigation/menu-n
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { AppRoutingModule } from './app-routing.module';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
-import { HttpClientXsrfModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -44,6 +44,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
       cookieName: 'XSRF-TOKEN',
       headerName: 'X-XSRF-TOKEN',
     }),
+    HttpClientModule
   ],
   providers: [
     {
