@@ -1,0 +1,10 @@
+<div class="title-container">
+  <mat-icon>help_outline</mat-icon>
+  <div class="title-dialog">{{ messageText }}</div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Nie</button>
+  <button class="button-yes" mat-button (click)="onYesClick()">Tak</button>
+</div>
+

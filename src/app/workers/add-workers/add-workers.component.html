@@ -3,40 +3,54 @@
   <div class="title-worker">Dodaj funkcjonariusza/pracownika:</div>
 </div>
 
-<div mat-dialog-content>
+<div>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Imię:</mat-label>
-    <input matInput>
-  </mat-form-field>
+  <form [formGroup]="workerForm" (submit)="workerForm.valid && save()">
+    <div mat-dialog-content>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Nazwisko:</mat-label>
-    <input matInput>
-  </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Imię:</mat-label>
+        <input matInput formControlName="name" required>
+        <mat-error *ngIf="workerForm.get('name')?.hasError('required')">Pole wymagane!</mat-error>
+        <mat-error *ngIf="workerForm.get('name')?.hasError('minlength')">Minimalna długość to 3 znaki!</mat-error>
+        <mat-error *ngIf="workerForm.get('name')?.hasError('maxlength')">Maksymalna długość to 25 znaków!</mat-error>
+      </mat-form-field>
 
+      <mat-form-field appearance="fill">
+        <mat-label>Nazwisko:</mat-label>
+        <input matInput formControlName="surname" required>
+        <mat-error *ngIf="workerForm.get('surname')?.hasError('required')">Pole wymagane!</mat-error>
+        <mat-error *ngIf="workerForm.get('surname')?.hasError('minlength')">Minimalna długość to 3 znaki!</mat-error>
+        <mat-error *ngIf="workerForm.get('surname')?.hasError('maxlength')">Maksymalna długość to 50 znaków!</mat-error>
+      </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Dział:</mat-label>
-    <mat-select [(ngModel)]="selectedValue" name="food">
-      <mat-option *ngFor="let food of foods" [value]="food.value">
-        {{food.viewValue}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Dział:</mat-label>
+        <mat-select panelClass="size-panel-sections" formControlName="section" required>
+          <mat-option *ngFor="let section of sections$ | async" [value]="section">
+            {{section.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="workerForm.get('section')?.hasError('required')">Pole wymagane!</mat-error>
+      </mat-form-field>
 
-  <mat-form-field appearance="fill">
-    <mat-label>Funkcja:</mat-label>
-    <mat-select [(ngModel)]="selectedValue" name="food">
-      <mat-option *ngFor="let food of foods" [value]="food.value">
-        {{food.viewValue}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Funkcja:</mat-label>
+        <mat-select panelClass="size-panel-functions" formControlName="function" required>
+          <mat-option *ngFor="let function of functions$ | async" [value]="function">
+            {{function.description}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="workerForm.get('function')?.hasError('required')">Pole wymagane!</mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Anuluj</button>
+      <button class="button-save" mat-button>Zapisz</button>
+    </div>
+
+  </form>
+
 </div>
-
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Anuluj</button>
-  <button class="button-save" mat-button [mat-dialog-close]="">Zapisz</button>
-</div>
-

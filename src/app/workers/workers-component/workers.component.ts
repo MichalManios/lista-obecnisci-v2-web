@@ -1,20 +1,22 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MenuStateService } from '../../shared/menu-state.service';
-import { Subscription, switchMap, tap } from 'rxjs';
-import { MatDialog } from '@angular/material/dialog';
+import { MenuStateService } from '../../shared/menu-state/menu-state.service';
+import { iif, Observable, of, Subscription, switchMap, tap } from 'rxjs';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { AddWorkersComponent } from '../add-workers/add-workers.component';
 import { WorkerFlattened } from '../models/worker-flattened.interface';
 import { WorkersService } from '../workers.service';
 import { Section } from '../../app-components/sections/model/section.interface';
 import { SectionService } from '../../app-components/sections/section.service';
+import { DialogMessageComponent } from '../../shared/dialog-message/dialog-message/dialog-message.component';
+import { DialogMessageEnum } from '../../shared/dialog-message/dialog-message/dialog-message.enum';
 
 @Component({
   selector: 'app-workers',
   templateUrl: './workers.component.html',
   styleUrls: ['./workers.component.css']
 })
-export class WorkersComponent implements OnInit, OnDestroy {
+export class WorkersComponent implements OnInit, OnDestroy { //dodaj sortowanie po funkcjach potem po nazwisku i imieniu, toasty
 
   sections!: Section[];
 
@@ -28,7 +30,7 @@ export class WorkersComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  private subscriptions$: Subscription[] = [];
+  private subscriptions$: Subscription = new Subscription();
 
   constructor(private menuStateService: MenuStateService,
               public dialog: MatDialog,
@@ -42,19 +44,43 @@ export class WorkersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.unsubscribeAllSubscriptions();
+    this.subscriptions$.unsubscribe();
   }
 
-  addWorkers(): void {
-    const dialogRef = this.dialog.open(AddWorkersComponent, {
-      disableClose: true,
-      width: '540px',
-      data: {},
+  addWorker(): void {
+    const dialogRef = this.getAddWorkerComponent();
+
+    const subscription$ = dialogRef.afterClosed()
+      .pipe(tap(workerFlattened => this.dataSource = [...this.dataSource, workerFlattened])).subscribe();
+
+    this.subscriptions$.add(subscription$);
+  }
+
+  updateWorker(worker: WorkerFlattened): void {
+    const dialogRef = this.getAddWorkerComponent();
+
+    dialogRef.componentInstance.workerFlattened = worker;
+    dialogRef.componentInstance.sectionName = this.sectionName;
+    const subscription$ = dialogRef.afterClosed().pipe(
+      tap(workerFlattened => this.dataSource = this.getUpdatedDataSource(workerFlattened))).subscribe();
+
+    this.subscriptions$.add(subscription$);
+  }
+
+  deleteWorker(workerId: number): void {
+    const dialogRef = this.dialog.open(DialogMessageComponent, {
+      disableClose: true
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    dialogRef.componentInstance.messageText = 'Czy na pewno chcesz usunąć pracownika/funkcjonariusza?';
+    const subscription$ = dialogRef.afterClosed().pipe(
+      switchMap(dialogMessage =>  iif(() => dialogMessage === DialogMessageEnum.YES,
+        this.delete(workerId),
+        of(null)))
+    )
+      .subscribe();
+
+    this.subscriptions$.add(subscription$);
   }
 
   private getAllSections() {
@@ -73,21 +99,31 @@ export class WorkersComponent implements OnInit, OnDestroy {
       tap(workers => this.dataSource = workers)
     ).subscribe();
 
-    this.addSubscriptionToUnsubscribe(subscription$);
+    this.subscriptions$.add(subscription$);
   }
 
   private getCurrentStateMenu(): void {
     const subscription$ = this.menuStateService.currentStateManu
       .pipe(tap(state => this.isMenuOpen = state)).subscribe();
 
-    this.addSubscriptionToUnsubscribe(subscription$);
+    this.subscriptions$.add(subscription$);
   }
 
-  private addSubscriptionToUnsubscribe(subscription: Subscription): void {
-    this.subscriptions$.push(subscription);
+  private delete(workerId: number): Observable<WorkerFlattened> {
+    return this.workerService.deleteWorker(workerId).pipe(
+      tap(workerDeleted => this.dataSource = this.dataSource.filter(worker => worker.id !== workerDeleted.id)));
   }
 
-  private unsubscribeAllSubscriptions(): void {
-    this.subscriptions$.forEach((subscription) => subscription.unsubscribe());
+  private getAddWorkerComponent(): MatDialogRef<AddWorkersComponent, any> {
+    return this.dialog.open(AddWorkersComponent, {
+      disableClose: true,
+      width: '540px',
+      data: {},
+    });
+  }
+
+  private getUpdatedDataSource(workerFlattened: WorkerFlattened): WorkerFlattened[] {
+    this.dataSource[this.dataSource.findIndex(({ id }) => id === workerFlattened.id)] = workerFlattened;
+    return [...this.dataSource];
   }
 }

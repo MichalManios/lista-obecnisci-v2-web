@@ -13,7 +13,7 @@ mat-icon {
 }
 
 .title-worker {
-  color:  #3f51b5;
+  color: #3f51b5;
   font-size: 2em;
   cursor: default;
   height: 1.5em;
@@ -37,4 +37,12 @@ mat-icon {
 .button-save {
   background: #3f51b5;
   color: white;
+}
+
+::ng-deep .mat-select-panel.size-panel-sections {
+  max-height: 16em;
+}
+
+::ng-deep .mat-select-panel.size-panel-functions {
+  max-height: 12em;
 }

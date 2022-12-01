@@ -1,5 +1,13 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import { Component, Input, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SectionService } from '../../app-components/sections/section.service';
+import {iif, Observable, tap} from 'rxjs';
+import { Section } from '../../app-components/sections/model/section.interface';
+import { FunctionService } from '../../app-components/function/function.service';
+import { FunctionDTO } from '../../app-components/function/model/function-dto.interface';
+import { WorkersService } from '../workers.service';
+import { WorkerFlattened } from '../models/worker-flattened.interface';
 
 @Component({
   selector: 'app-add-workers',
@@ -8,40 +16,70 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 })
 export class AddWorkersComponent implements OnInit {
 
-  constructor(
-    public dialogRef: MatDialogRef<AddWorkersComponent>,
-    //@Inject(MAT_DIALOG_DATA) public data: DialogData,
-  ) {}
+  workerForm!: FormGroup;
+
+  sections$!: Observable<Section[]>;
+
+  functions$!: Observable<FunctionDTO[]>;
+
+  @Input()
+  workerFlattened = {} as WorkerFlattened;
+
+  @Input()
+  sectionName = '';
+
+  constructor(public dialogRef: MatDialogRef<AddWorkersComponent>,
+              private formBuilder: FormBuilder,
+              private sectionService: SectionService,
+              private functionService: FunctionService,
+              private workerService: WorkersService) {
+  }
 
   ngOnInit(): void {
+    this.setForm(this.workerFlattened);
+    this.sections$ = this.getSections();
+    this.functions$ = this.getFunctions();
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  selectedValue!: string;
-  selectedCar!: string;
+  save(): void {
+    iif(() => this.workerFlattened.id != null, this.updateWorker(), this.addNewWorker()).subscribe();
+  }
 
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
-  ];
+  getSections(): Observable<Section[]> {
+    return this.sectionService.getAllSections().pipe(tap(sections =>
+      this.workerForm.patchValue({ section: this.workerFlattened.id
+          ? sections.find(({ name}) => name === this.sectionName)
+          : null })));
+  }
 
-  cars: Car[] = [
-    {value: 'volvo', viewValue: 'Volvo'},
-    {value: 'saab', viewValue: 'Saab'},
-    {value: 'mercedes', viewValue: 'Mercedes'},
-  ];
-}
+  getFunctions(): Observable<FunctionDTO[]> {
+    return this.functionService.getAllFunctions().pipe(tap(functions =>
+      this.workerForm.patchValue({ function: this.workerFlattened.id
+          ? functions.find(({ description}) => description === this.workerFlattened.function)
+          : null })));
+  }
 
-interface Food {
-  value: string;
-  viewValue: string;
-}
+  private setForm(workerFlattened: WorkerFlattened) {
+    this.workerForm = this.formBuilder.group({
+      id: [workerFlattened.id ? workerFlattened.id : null],
+      name: [workerFlattened.id ? workerFlattened.name : null, [Validators.required, Validators.minLength(3), Validators.maxLength(25)], null, {updateOn: 'blur'}],
+      surname: [workerFlattened.id ? workerFlattened.surname : null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)], null, {updateOn: 'blur'}],
+      section: [null, [Validators.required], null, {updateOn: 'blur'}],
+      function: [null, [Validators.required], null, {updateOn: 'blur'}]
+    });
+  }
 
-interface Car {
-  value: string;
-  viewValue: string;
+  private addNewWorker(): Observable<WorkerFlattened> {
+    return this.workerService.addNewWorker(this.workerForm.getRawValue())
+      .pipe(tap(worker => this.dialogRef.close(worker)));
+  }
+
+  private updateWorker(): Observable<WorkerFlattened> {
+    return this.workerService.updateWorker(this.workerForm.getRawValue())
+      .pipe(tap(worker => this.dialogRef.close(worker)));
+  }
 }
