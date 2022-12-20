@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import {APP_INITIALIZER,  NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app-components/app-component/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,6 +10,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { AppRoutingModule } from './app-routing.module';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { ErrorHandlerService } from './common/error-handler/error-handler.service';
+import { httpInterceptorProviders } from './common/http-interceptors';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { ToastModule } from './common/toast/toast.module';
+import { PipesModule } from './common/pipes/pipes.module';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -44,16 +49,21 @@ function initializeKeycloak(keycloak: KeycloakService) {
       cookieName: 'XSRF-TOKEN',
       headerName: 'X-XSRF-TOKEN',
     }),
-    HttpClientModule
+    HttpClientModule,
+    ToastModule,
+    OverlayModule,
+    PipesModule
   ],
   providers: [
     {
       provide: APP_INITIALIZER,
       useFactory: initializeKeycloak,
       multi: true,
-      deps: [KeycloakService],
-    }
+      deps: [ KeycloakService ],
+    },
+    ErrorHandlerService,
+    httpInterceptorProviders
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

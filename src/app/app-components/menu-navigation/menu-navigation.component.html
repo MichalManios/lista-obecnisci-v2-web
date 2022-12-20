@@ -11,7 +11,8 @@
         <img mat-card-sm-image src="../../../assets/menu-icons/worker.png" alt="Photo of a worker for workers path" class="menu-icon">
         <h2 class="text-menu">Pracownicy</h2>
       </a>
-      <a class="position-menu neumorphic neumorphic--pressed">
+      <a class="position-menu neumorphic neumorphic--pressed" (click)="getCurrentUrl()" routerLinkActive="active"
+         [routerLink]="['/sections']" [ngClass]="'sections' === url ? 'position-menu-clicked' : ''">
         <img mat-card-sm-image src="../../../assets/menu-icons/department.png" alt="Photo of a departments for departments path" class="menu-icon">
         <h2 class="text-menu">Działy</h2>
       </a>

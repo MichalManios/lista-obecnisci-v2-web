@@ -1,0 +1,84 @@
+<div class="container" [ngClass]="isMenuOpen ? 'menu-hide' : ''">
+
+  <mat-card class="worker-title-card">
+    <img mat-card-sm-image src="../../../../assets/menu-icons/worker.png" alt="Photo of a worker for workers path"
+         class="worker-icon">
+    <div class="title-worker">
+      Funkcjonariusze i pracownicy:
+    </div>
+    <div class="button-container">
+      <mat-form-field appearance="fill" class="select">
+        <mat-label>Dział:</mat-label>
+        <mat-select panelClass="size-panel" [(ngModel)]="sectionName">
+          <mat-option *ngFor="let section of sections" [value]="section.name">
+            {{section.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-fab color="primary" aria-label="Button to add worker with icon add person."
+              matTooltip="Dodaj funkcjonariusza/pracownika"
+              [matTooltipShowDelay]="500"
+              [matTooltipHideDelay]="0"
+              (click)="addWorker()">
+        <mat-icon>person_add</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource | orderBy: displayOrder" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="lp">
+        <th mat-header-cell *matHeaderCellDef> Lp:</th>
+        <td mat-cell *matCellDef="let element; let i = index">{{i + 1}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Imię:</th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="surname">
+        <th mat-header-cell *matHeaderCellDef> Nazwisko:</th>
+        <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="function">
+        <th mat-header-cell *matHeaderCellDef> Funkcja:</th>
+        <td mat-cell *matCellDef="let element"> {{element.function}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="buttons">
+        <th mat-header-cell *matHeaderCellDef class="buttons-column"></th>
+        <td mat-cell *matCellDef="let element">
+          <div class="container-buttons">
+            <div class="button-container-table-edit">
+              <button mat-mini-fab aria-label="Icon button with delete icon" (click)="updateWorker(element)"
+                      matTooltip="Edytuj funkcjonariusza/pracownika"
+                      [matTooltipShowDelay]="500"
+                      [matTooltipHideDelay]="0">
+                <mat-icon>border_color</mat-icon>
+              </button>
+            </div>
+            <div class="button-container-table-delete">
+              <button mat-mini-fab aria-label="Icon button with delete icon" (click)="deleteWorker(element.id)"
+                      matTooltip="Usuń funkcjonariusza/pracownika"
+                      [matTooltipShowDelay]="500"
+                      [matTooltipHideDelay]="0">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell text-center" [attr.colspan]="displayedColumns.length">lista jest pusta</td>
+      </tr>
+
+    </table>
+  </div>
+
+</div>

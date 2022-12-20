@@ -1,0 +1,146 @@
+.container {
+  margin: 1.5em 1em 1.5em 17em;
+  height: 100vh;
+}
+
+.section-title-card {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  background: #e6e6e6;
+  display: flex;
+  align-items: center;
+}
+
+.table-container {
+  height: 62vh;
+  overflow-y: auto;
+}
+
+table {
+  width: 100%;
+  position: sticky;
+  z-index: 100;
+}
+
+th {
+  border-bottom: 1px solid black;
+  position: sticky;
+  background: #e6e6e6;
+  color: black;
+}
+
+td {
+  border: transparent;
+  cursor: default;
+}
+
+tr:nth-child(even) {
+  background: #f6f6f6;
+}
+
+.menu-hide {
+  margin-left: 5em;
+}
+
+.section-icon {
+  width: 2.25em;
+  height: 2.25em;
+  display: inline-block;
+  margin-right: 0.5em;
+}
+
+.title-section {
+  display: flex;
+  align-items: center;
+  height: 2.25em;
+  font-size: 2em;
+  cursor: default;
+}
+
+.container-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 8em;
+  align-items: end;
+  margin: 0px 0px 0px auto;
+}
+
+.select {
+  height: 4em;
+  margin: auto 1em auto auto;
+}
+
+.button-container button:hover {
+  background: white;
+}
+
+.button-container button:hover mat-icon{
+  color:black;
+}
+
+.button-container-table-delete {
+  display: inline-block;
+  justify-content: center;
+  width: 4em;
+}
+
+.button-container-table-delete button {
+  background: #E91E63;
+}
+
+.button-container-table-delete button:hover {
+  background: white;
+}
+
+.button-container-table-delete button:hover mat-icon{
+  color: #E91E63;
+}
+
+.button-container-table-edit {
+  display: inline-block;
+  justify-content: center;
+  width: 4em;
+}
+
+.button-container-table-edit button {
+  background: white;
+}
+
+.button-container-table-edit mat-icon {
+  color: black;
+}
+
+.button-container-table-edit button:hover mat-icon{
+  color: #E91E63;
+}
+
+.buttons-column {
+  width: 10em;
+}
+
+.text-center {
+  text-align: center;
+}
+
+::ng-deep .mat-form-field .mat-form-field-label {
+  color: #3f51b5;
+}
+
+::ng-deep .mat-form-field.mat-primary .mat-select-arrow{
+  color: #3f51b5;
+}
+
+::ng-deep .mat-select-value {
+  color: #3f51b5 !important;
+}
+
+::ng-deep .mat-select-panel.size-panel {
+  max-height: 16em;
+}

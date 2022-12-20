@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SectionService } from '../../app-components/sections/section.service';
+import { SectionService } from '../../sections/section.service';
 import {iif, Observable, tap} from 'rxjs';
-import { Section } from '../../app-components/sections/model/section.interface';
-import { FunctionService } from '../../app-components/function/function.service';
-import { FunctionDTO } from '../../app-components/function/model/function-dto.interface';
+import { Section } from '../../sections/model/section.interface';
+import { FunctionService } from '../../function/function.service';
+import { FunctionDTO } from '../../function/model/function-dto.interface';
 import { WorkersService } from '../workers.service';
 import { WorkerFlattened } from '../models/worker-flattened.interface';
 

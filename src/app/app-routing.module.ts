@@ -9,7 +9,9 @@ const routes: Routes = [
   { path: 'application', component: StartPageComponent, canActivate: [AuthKeyClockGuard],
     data: { roles: ['AUTHORIZED_USER', 'ADMINISTRATOR'] } },
   { path: 'workers', canActivate: [AuthKeyClockGuard], data: { roles: ['AUTHORIZED_USER', 'ADMINISTRATOR'] },
-    loadChildren: () => import('./workers/workers.module').then(m => m.WorkersModule) }
+    loadChildren: () => import('./app-components/workers/workers.module').then(m => m.WorkersModule) },
+  { path: 'sections', canActivate: [AuthKeyClockGuard], data: { roles: ['AUTHORIZED_USER', 'ADMINISTRATOR'] },
+    loadChildren: () => import('./app-components/sections/sections.module').then(m => m.SectionsModule) }
 ];
 
 @NgModule({

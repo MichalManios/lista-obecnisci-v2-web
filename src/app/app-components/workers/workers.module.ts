@@ -14,7 +14,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { WorkersService } from './workers.service';
-import {DialogMessageModule} from "../shared/dialog-message/dialog-message.module";
+import { DialogMessageModule } from '../../shared/dialog-message/dialog-message.module';
+import {PipesModule} from "../../common/pipes/pipes.module";
 
 
 
@@ -26,22 +27,23 @@ import {DialogMessageModule} from "../shared/dialog-message/dialog-message.modul
   exports: [
     WorkersComponent
   ],
-    imports: [
-        CommonModule,
-        MatCardModule,
-        MatTooltipModule,
-        MatIconModule,
-        MatTableModule,
-        MatButtonModule,
-        WorkersRoutingModule,
-        MatFormFieldModule,
-        FormsModule,
-        MatDialogModule,
-        MatInputModule,
-        MatSelectModule,
-        ReactiveFormsModule,
-        DialogMessageModule
-    ],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatTooltipModule,
+    MatIconModule,
+    MatTableModule,
+    MatButtonModule,
+    WorkersRoutingModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatDialogModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    DialogMessageModule,
+    PipesModule
+  ],
   providers: [ WorkersService ]
 })
 export class WorkersModule { }

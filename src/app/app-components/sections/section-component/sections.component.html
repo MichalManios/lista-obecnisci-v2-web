@@ -1,26 +1,18 @@
 <div class="container" [ngClass]="isMenuOpen ? 'menu-hide' : ''">
 
-  <mat-card class="worker-title-card">
-    <img mat-card-sm-image src="../../../assets/menu-icons/worker.png" alt="Photo of a worker for workers path"
-         class="worker-icon">
-    <div class="title-worker">
-      Funkcjonariusze i pracownicy:
+  <mat-card class="section-title-card">
+    <img mat-card-sm-image src="../../../../assets/menu-icons/department.png" alt="Photo of a section for sections path"
+         class="section-icon">
+    <div class="title-section">
+      Działy Aresztu Śledczego w Łodzi:
     </div>
     <div class="button-container">
-      <mat-form-field appearance="fill" class="select">
-        <mat-label>Dział:</mat-label>
-        <mat-select panelClass="size-panel" [(ngModel)]="sectionName">
-          <mat-option *ngFor="let section of sections" [value]="section.name">
-            {{section.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <button mat-fab color="primary" aria-label="Button to add worker with icon add person."
-              matTooltip="Dodaj funkcjonariusza/pracownika"
+      <button mat-fab color="primary" aria-label="Button to add section with icon add section."
+              matTooltip="Dodaj dział"
               [matTooltipShowDelay]="500"
               [matTooltipHideDelay]="0"
-              (click)="addWorker()">
-        <mat-icon>person_add</mat-icon>
+              >
+        <mat-icon>add_box</mat-icon>
       </button>
     </div>
   </mat-card>
@@ -33,18 +25,8 @@
       </ng-container>
 
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Imię:</th>
+        <th mat-header-cell *matHeaderCellDef> Nazwa działu:</th>
         <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="surname">
-        <th mat-header-cell *matHeaderCellDef> Nazwisko:</th>
-        <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="function">
-        <th mat-header-cell *matHeaderCellDef> Funkcja:</th>
-        <td mat-cell *matCellDef="let element"> {{element.function}} </td>
       </ng-container>
 
       <ng-container matColumnDef="buttons">
@@ -52,16 +34,16 @@
         <td mat-cell *matCellDef="let element">
           <div class="container-buttons">
             <div class="button-container-table-edit">
-              <button mat-mini-fab aria-label="Icon button with delete icon" (click)="updateWorker(element)"
-                      matTooltip="Edytuj funkcjonariusza/pracownika"
+              <button mat-mini-fab aria-label="Icon button with delete icon"
+                      matTooltip="Edytuj nazwę działu"
                       [matTooltipShowDelay]="500"
                       [matTooltipHideDelay]="0">
                 <mat-icon>border_color</mat-icon>
               </button>
             </div>
             <div class="button-container-table-delete">
-              <button mat-mini-fab aria-label="Icon button with delete icon" (click)="deleteWorker(element.id)"
-                      matTooltip="Usuń funkcjonariusza/pracownika"
+              <button mat-mini-fab aria-label="Icon button with delete icon"
+                      matTooltip="Usuń dział"
                       [matTooltipShowDelay]="500"
                       [matTooltipHideDelay]="0">
                 <mat-icon>delete</mat-icon>
@@ -82,3 +64,4 @@
   </div>
 
 </div>
+

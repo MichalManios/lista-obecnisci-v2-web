@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { WorkerFlattened } from './models/worker-flattened.interface';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import {WorkerDTO} from "./models/worker-dto.interface";
 
 @Injectable({
