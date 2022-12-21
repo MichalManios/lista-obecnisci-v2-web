@@ -14,27 +14,30 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {DialogMessageModule} from "../../shared/dialog-message/dialog-message.module";
+import { AddSectionsComponent } from './add-sections/add-sections.component';
+import {PipesModule} from "../../common/pipes/pipes.module";
 
 
 
 @NgModule({
-  declarations: [ SectionsComponent ],
-  imports: [
-    CommonModule,
-    SectionsRoutingModule,
-    MatCardModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatTableModule,
-    MatIconModule,
-    MatFormFieldModule,
-    FormsModule,
-    MatDialogModule,
-    MatInputModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    DialogMessageModule
-  ],
+  declarations: [ SectionsComponent, AddSectionsComponent ],
+    imports: [
+        CommonModule,
+        SectionsRoutingModule,
+        MatCardModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatTableModule,
+        MatIconModule,
+        MatFormFieldModule,
+        FormsModule,
+        MatDialogModule,
+        MatInputModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        DialogMessageModule,
+        PipesModule
+    ],
   exports: [ SectionsComponent ],
   providers: [ SectionService ]
 })

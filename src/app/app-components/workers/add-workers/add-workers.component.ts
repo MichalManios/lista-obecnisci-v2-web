@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SectionService } from '../../sections/section.service';
-import {iif, Observable, tap} from 'rxjs';
+import { iif, Observable, tap } from 'rxjs';
 import { Section } from '../../sections/model/section.interface';
 import { FunctionService } from '../../function/function.service';
 import { FunctionDTO } from '../../function/model/function-dto.interface';
@@ -66,8 +66,10 @@ export class AddWorkersComponent implements OnInit {
   private setForm(workerFlattened: WorkerFlattened) {
     this.workerForm = this.formBuilder.group({
       id: [workerFlattened.id ? workerFlattened.id : null],
-      name: [workerFlattened.id ? workerFlattened.name : null, [Validators.required, Validators.minLength(3), Validators.maxLength(25)], null, {updateOn: 'blur'}],
-      surname: [workerFlattened.id ? workerFlattened.surname : null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)], null, {updateOn: 'blur'}],
+      name: [workerFlattened.id ? workerFlattened.name : null, [Validators.required, Validators.minLength(3),
+        Validators.maxLength(25)], null, {updateOn: 'blur'}],
+      surname: [workerFlattened.id ? workerFlattened.surname : null, [Validators.required,
+        Validators.minLength(3), Validators.maxLength(50)], null, {updateOn: 'blur'}],
       section: [null, [Validators.required], null, {updateOn: 'blur'}],
       function: [null, [Validators.required], null, {updateOn: 'blur'}]
     });

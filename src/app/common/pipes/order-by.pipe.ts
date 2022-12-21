@@ -39,7 +39,6 @@ export class OrderByPipe implements PipeTransform {
     const first = this.convertToString(valueA);
     const second = this.convertToString(valueB);
 
-    return (typeof valueA === 'number' && typeof valueB === 'number') ?
-    valueA - valueB : first.localeCompare(second);
+    return first.localeCompare(second);
   }
 }

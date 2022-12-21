@@ -28,7 +28,7 @@ export class WorkersComponent implements OnInit, OnDestroy {
 
   dataSource!: WorkerFlattened[];
 
-  displayOrder = ['function', 'surname', 'name']; //sortowanie odrębne po funkcjach: kierownik zastępca itd...
+  displayOrder = ['function', 'surname', 'name'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -95,14 +95,12 @@ export class WorkersComponent implements OnInit, OnDestroy {
   }
 
   private initData(): void {
-    const subscription$ = this.getAllSections().pipe(
+    this.getAllSections().pipe(
       tap(sections => this.sections = sections),
-      tap(sections => this.sectionName = sections[0].name),
-      switchMap(sections => this.getWorkersBySection(sections[0].name)),
+      tap(sections => this.sectionName = sections[0]?.name),
+      switchMap(sections => this.getWorkersBySection(sections[0]?.name)),
       tap(workers => this.dataSource = workers)
     ).subscribe();
-
-    this.subscriptions$.add(subscription$);
   }
 
   private getCurrentStateMenu(): void {

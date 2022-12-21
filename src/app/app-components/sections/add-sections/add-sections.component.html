@@ -1,0 +1,28 @@
+<div class="title-container">
+  <mat-icon>add_box</mat-icon>
+  <div class="title-section">Dodaj dział:</div>
+</div>
+
+<div>
+
+  <form [formGroup]="sectionForm" (submit)="sectionForm.valid && save()">
+    <div mat-dialog-content>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nazwa działu:</mat-label>
+        <input matInput formControlName="name" required>
+        <mat-error *ngIf="sectionForm.get('name')?.hasError('required')">Pole wymagane!</mat-error>
+        <mat-error *ngIf="sectionForm.get('name')?.hasError('minlength')">Minimalna długość to 3 znaki!</mat-error>
+        <mat-error *ngIf="sectionForm.get('name')?.hasError('maxlength')">Maksymalna długość to 25 znaków!</mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Anuluj</button>
+      <button class="button-save" mat-button>Zapisz</button>
+    </div>
+
+  </form>
+
+</div>
