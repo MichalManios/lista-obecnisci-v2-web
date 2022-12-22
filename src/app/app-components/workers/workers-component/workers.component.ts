@@ -10,6 +10,7 @@ import { Section } from '../../sections/model/section.interface';
 import { SectionService } from '../../sections/section.service';
 import { DialogMessageComponent } from '../../../shared/dialog-message/dialog-message/dialog-message.component';
 import { DialogMessageEnum } from '../../../shared/dialog-message/dialog-message/dialog-message.enum';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-workers',
@@ -53,7 +54,7 @@ export class WorkersComponent implements OnInit, OnDestroy {
     const dialogRef = this.getAddWorkerComponent();
 
     const subscription$ = dialogRef.afterClosed()
-      .pipe(tap(result => this.dataSource = result != null ? [...this.dataSource, result] : this.dataSource))
+      .pipe(tap(result => this.updateDataSource(result)))
         .subscribe();
 
     this.subscriptions$.add(subscription$);
@@ -63,7 +64,6 @@ export class WorkersComponent implements OnInit, OnDestroy {
     const dialogRef = this.getAddWorkerComponent();
 
     dialogRef.componentInstance.workerFlattened = worker;
-    dialogRef.componentInstance.sectionName = this.sectionName;
     const subscription$ = dialogRef.afterClosed().pipe(
       tap(workerFlattened => this.dataSource = this.getUpdatedDataSource(workerFlattened))).subscribe();
 
@@ -84,6 +84,11 @@ export class WorkersComponent implements OnInit, OnDestroy {
       .subscribe();
 
     this.subscriptions$.add(subscription$);
+  }
+
+  changeSection($event: MatSelectChange) {
+    this.sectionName = $event.value;
+    this.getWorkersBySection(this.sectionName).pipe(tap(workers => this.dataSource = workers)).subscribe();
   }
 
   private getAllSections(): Observable<Section[]> {
@@ -125,6 +130,12 @@ export class WorkersComponent implements OnInit, OnDestroy {
 
   private getUpdatedDataSource(workerFlattened: WorkerFlattened): WorkerFlattened[] {
     this.dataSource[this.dataSource.findIndex(({ id }) => id === workerFlattened.id)] = workerFlattened;
-    return [...this.dataSource];
+    return [...this.dataSource.filter(({ section }) => section === this.sectionName)];
+  }
+
+  private updateDataSource(result: WorkerFlattened | null): void {
+    this.dataSource = result != null && result.section === this.sectionName
+      ? [...this.dataSource, result]
+      : this.dataSource
   }
 }

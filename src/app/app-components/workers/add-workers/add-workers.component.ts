@@ -25,9 +25,6 @@ export class AddWorkersComponent implements OnInit {
   @Input()
   workerFlattened = {} as WorkerFlattened;
 
-  @Input()
-  sectionName = '';
-
   constructor(public dialogRef: MatDialogRef<AddWorkersComponent>,
               private formBuilder: FormBuilder,
               private sectionService: SectionService,
@@ -52,7 +49,7 @@ export class AddWorkersComponent implements OnInit {
   getSections(): Observable<Section[]> {
     return this.sectionService.getAllSections().pipe(tap(sections =>
       this.workerForm.patchValue({ section: this.workerFlattened.id
-          ? sections.find(({ name}) => name === this.sectionName)
+          ? sections.find(({ name}) => name === this.workerFlattened.section)
           : null })));
   }
 

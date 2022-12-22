@@ -7,4 +7,6 @@ export interface WorkerFlattened {
   surname: string;
 
   function: string;
+
+  section: string;
 }

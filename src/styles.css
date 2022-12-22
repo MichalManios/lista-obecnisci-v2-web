@@ -12,6 +12,21 @@ body {
 .toast {
   position: relative;
   bottom: 3em;
-  background: forestgreen;
   color: aliceblue;
+}
+
+.toast-success {
+  background: forestgreen;
+}
+
+.toast-warning {
+  background: orange;
+}
+
+.toast-danger {
+  background: red;
+}
+
+.toast-info {
+  background: dodgerblue;
 }

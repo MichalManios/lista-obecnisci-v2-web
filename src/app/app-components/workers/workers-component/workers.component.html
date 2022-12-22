@@ -9,7 +9,7 @@
     <div class="button-container">
       <mat-form-field appearance="fill" class="select">
         <mat-label>Dział:</mat-label>
-        <mat-select panelClass="size-panel" [(ngModel)]="sectionName">
+        <mat-select panelClass="size-panel" [(ngModel)]="sectionName" (selectionChange)="changeSection($event)">
           <mat-option *ngFor="let section of sections" [value]="section.name">
             {{section.name}}
           </mat-option>
