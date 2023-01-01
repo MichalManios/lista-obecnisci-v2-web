@@ -37,8 +37,8 @@
       <mat-form-field appearance="fill">
         <mat-label>Funkcja:</mat-label>
         <mat-select panelClass="size-panel-functions" formControlName="function" required>
-          <mat-option *ngFor="let function of functions$ | async" [value]="function">
-            {{function.description}}
+          <mat-option *ngFor="let functionInSection of functions$ | async" [value]="functionInSection">
+            {{functionInSection.description}}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="workerForm.get('function')?.hasError('required')">Pole wymagane!</mat-error>
@@ -47,7 +47,7 @@
     </div>
 
     <div mat-dialog-actions>
-      <button mat-button (click)="onNoClick()">Anuluj</button>
+      <button type="button" mat-button (click)="onNoClick()">Anuluj</button>
       <button class="button-save" mat-button>Zapisz</button>
     </div>
 

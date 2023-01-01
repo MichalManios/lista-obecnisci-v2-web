@@ -129,7 +129,7 @@ export class WorkersComponent implements OnInit, OnDestroy {
   }
 
   private getUpdatedDataSource(workerFlattened: WorkerFlattened): WorkerFlattened[] {
-    this.dataSource[this.dataSource.findIndex(({ id }) => id === workerFlattened.id)] = workerFlattened;
+    this.dataSource[this.dataSource.findIndex(({ id }) => id === workerFlattened?.id)] = workerFlattened;
     return [...this.dataSource.filter(({ section }) => section === this.sectionName)];
   }
 

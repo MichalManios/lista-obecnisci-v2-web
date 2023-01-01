@@ -102,7 +102,7 @@ export class SectionsComponent implements OnInit {
   }
 
   private getUpdatedDataSource(section: Section): Section[] {
-    this.dataSource[this.dataSource.findIndex(({ id }) => id === section.id)] = section;
+    this.dataSource[this.dataSource.findIndex(({ id }) => id === section?.id)] = section;
     return [...this.dataSource];
   }
 }
