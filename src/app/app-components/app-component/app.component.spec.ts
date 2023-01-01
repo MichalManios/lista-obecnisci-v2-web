@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { KeycloakService } from 'keycloak-angular';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -7,6 +8,9 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      providers: [
+        KeycloakService
+      ]
     }).compileComponents();
   });
 
@@ -16,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'lista-obecnisci-v2-web'`, () => {
+  it(`should have as title 'Lista obecności'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('lista-obecnisci-v2-web');
+    expect(app.title).toEqual('Lista obecności');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('lista-obecnisci-v2-web app is running!');
+    expect(compiled.querySelector('span')?.textContent).toContain('Lista obecności');
   });
 });

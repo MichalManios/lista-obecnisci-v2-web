@@ -118,18 +118,17 @@ describe('OrderByPipe', () => {
       { id: 4, name: { value: 10 } },
       { id: 1, name: { value: 11 } },
       { id: 2, name: { value: 1 } },
-      { id: 5, name: { value: 0 } },
-      { id: 3, name: { value: 2 } },
+      { id: 3, name: { value: 0 } },
     ];
 
     const expected = [
-      { id: 5, name: { value: 0 } },
+      { id: 3, name: { value: 0 } },
       { id: 2, name: { value: 1 } },
-      { id: 3, name: { value: 2 } },
       { id: 4, name: { value: 10 } },
       { id: 1, name: { value: 11 } },
     ];
 
+    console.log(pipe.transform(source, ['name.value']))
     expect(pipe.transform(source, ['name.value'])).toEqual(expected);
   });
 

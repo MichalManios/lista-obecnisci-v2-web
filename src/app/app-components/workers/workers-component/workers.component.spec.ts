@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WorkersComponent } from './workers.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Overlay } from '@angular/cdk/overlay';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { PipesModule } from '../../../common/pipes/pipes.module';
 
 describe('WorkersComponent', () => {
   let component: WorkersComponent;
@@ -8,7 +12,12 @@ describe('WorkersComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WorkersComponent ]
+      imports: [ HttpClientTestingModule, PipesModule ],
+      declarations: [ WorkersComponent ],
+      providers: [
+        { provide: MatDialog, useValue: {} },
+        Overlay
+      ]
     })
     .compileComponents();
   });

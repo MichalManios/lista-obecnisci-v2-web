@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddSectionsComponent } from './add-sections.component';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AddSectionsComponent', () => {
   let component: AddSectionsComponent;
@@ -8,7 +11,13 @@ describe('AddSectionsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddSectionsComponent ]
+      imports: [ HttpClientTestingModule ],
+      declarations: [ AddSectionsComponent ],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: [] },
+        FormBuilder
+      ]
     })
     .compileComponents();
 
