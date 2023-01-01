@@ -128,7 +128,6 @@ describe('OrderByPipe', () => {
       { id: 1, name: { value: 11 } },
     ];
 
-    console.log(pipe.transform(source, ['name.value']))
     expect(pipe.transform(source, ['name.value'])).toEqual(expected);
   });
 
